@@ -25,7 +25,7 @@ function App() {
         <ExpensesItem />
       </main>
       <h1>
-        TOtal spending :{" "}
+        Total spending :{" "}
         <span className="total">
           Rp.{" "}
           {expenses.reduce((acc, curr) => {

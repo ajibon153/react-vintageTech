@@ -5,6 +5,7 @@ const ExpensesItem = ({ expense }) => {
   // let charge = 0;
   // let amount = 0;
   // if (expense) {
+  let id = expense && expense.id;
   let charge = expense && expense.charge;
   let amount = expense && expense.amount;
   // let { id, charge, amount } = expense;
