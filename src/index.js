@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 // import "./index.css"; //Course 1
-import "./2CocktailDb/Index.css"; //Course 2
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
