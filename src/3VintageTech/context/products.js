@@ -1,8 +1,8 @@
 // products context
 import React from "react";
 import axios from "axios"; // npm i axios --save
-// import url from "../utils/URL";
-import url from "../utils/localProduct";
+import url from "../utils/URL";
+// import url from "../utils/localProduct";
 import { featureProducts } from "../utils/helpers";
 // useEffect()
 // by default run after every render
