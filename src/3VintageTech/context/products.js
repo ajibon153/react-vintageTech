@@ -3,7 +3,8 @@ import React from "react";
 import axios from "axios"; // npm i axios --save
 import url from "../utils/URL";
 // import url from "../utils/localProduct";
-import { featureProducts } from "../utils/helpers";
+import { featureProducts, flattenProducts } from "../utils/helpers";
+import Product from "../components/Products/Product";
 // useEffect()
 // by default run after every render
 // let perfom side effect like= data fetching
@@ -13,7 +14,7 @@ import { featureProducts } from "../utils/helpers";
 export const ProductContext = React.createContext();
 
 export default function ProductProvider({ children }) {
-  // console.log(url);
+  // console.log(url + "/products");
 
   const [loading, setLoading] = React.useState(false);
   const [products, setProducts] = React.useState([]);
@@ -24,12 +25,11 @@ export default function ProductProvider({ children }) {
     axios.get(`${url}/products`).then(
       // (storeProduct) => console.log(storeProduct) //tes
       (response) => {
-        console.log(`url ${url}`);
-        console.log(`response ${response}`);
-
-        const feature = featureProducts(response.data);
+        const product = flattenProducts(response.data);
+        const feature = featureProducts(product);
+        // console.log("product" + product);
+        setProducts(product);
         setFeatured(feature);
-        setProducts(response.data);
         setLoading(false);
       }
     );

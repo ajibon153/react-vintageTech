@@ -2,6 +2,7 @@ import React from "react";
 import { CartContext } from "../context/cart";
 import EmptyCart from "../components/Cart/EmptyCart";
 import CartItem from "../components/Cart/CartItem";
+import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 
 export default function Cart() {
@@ -19,7 +20,15 @@ export default function Cart() {
         {cart.map((item) => {
           return <CartItem key={item.id} {...item} />;
         })}
-        <h2>total : $ {total}</h2>
+        <h2>
+          total :
+          <NumberFormat
+            value={total}
+            displayType={"text"}
+            thousandSeparator={true}
+            prefix={"Rp "}
+          />
+        </h2>
         {user ? (
           <Link to="/checkout" className="btn btn-primary btn-block">
             checkout

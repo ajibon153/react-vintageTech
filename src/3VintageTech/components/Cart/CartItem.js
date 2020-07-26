@@ -1,17 +1,25 @@
 import React from "react";
 import { FaAngleUp, FaAngleDown } from "react-icons/fa";
 import { CartContext } from "../../context/cart";
+import NumberFormat from "react-number-format";
 
-export default function CartItem({ id, image, title, price, amount }) {
+export default function CartItem({ id, image, Title, price, amount }) {
   const { removeItem, increaseAmount, decreaseAmount } = React.useContext(
     CartContext
   );
   return (
     <article className="cart-item">
-      <img src={image} alt={title} />
+      <img src={image} alt={Title} />
       <div>
-        <h4>{title}</h4>
-        <h5>${price}</h5>
+        <h4>{Title}</h4>
+        <h5>
+          <NumberFormat
+            value={price}
+            displayType={"text"}
+            thousandSeparator={true}
+            prefix={"Rp "}
+          />
+        </h5>
         <button
           type="button"
           className="card-btn remove-btn"

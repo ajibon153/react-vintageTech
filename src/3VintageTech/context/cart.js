@@ -52,8 +52,8 @@ function CartProvider({ children }) {
     setCart(newAmount);
   };
   const addToCart = (product) => {
-    console.log([cart]);
-    console.log(product);
+    // console.log([cart]);
+    // console.log(product);
     const { id, image, title, price, amount } = product;
 
     const item = [...cart].find((item) => item.id === id);
