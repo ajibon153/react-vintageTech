@@ -32,7 +32,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     // alert
     e.preventDefault();
-    console.log("member " + isMember);
+    // console.log("member " + isMember);
     // console.log("email " + email);
     // console.log("password " + password);
     // console.log("username " + username);
