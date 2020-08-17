@@ -3,7 +3,7 @@ import { FaAngleUp, FaAngleDown } from "react-icons/fa";
 import { CartContext } from "../../context/cart";
 import NumberFormat from "react-number-format";
 
-export default function CartItem({ id, image, Title, price, amount }) {
+export default function CartItem({ id, image, Title, Price, amount }) {
   const { removeItem, increaseAmount, decreaseAmount } = React.useContext(
     CartContext
   );
@@ -14,7 +14,7 @@ export default function CartItem({ id, image, Title, price, amount }) {
         <h4>{Title}</h4>
         <h5>
           <NumberFormat
-            value={price}
+            value={Price}
             displayType={"text"}
             thousandSeparator={true}
             prefix={"Rp "}

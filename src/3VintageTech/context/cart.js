@@ -25,13 +25,13 @@ function CartProvider({ children }) {
     }, 0);
     setCartItem(newCartItems); //total barang
     let newTotal = cart.reduce((total, cartItem) => {
-      return (total += cartItem.amount * cartItem.price);
+      return (total += cartItem.amount * cartItem.Price);
     }, 0);
     newTotal = parseFloat(newTotal.toFixed(2));
     setTotal(newTotal);
   }, [cart]);
-
   const removeItem = (id) => {
+    console.log("remove func");
     let newCart = [...cart].filter((item) => item.id !== id);
     setCart(newCart);
   };
@@ -44,25 +44,36 @@ function CartProvider({ children }) {
     setCart(newAmount);
   };
   const decreaseAmount = (id) => {
+    let if_zero;
     let newAmount = [...cart].map((item) => {
-      return item.id === id
-        ? { ...item, amount: item.amount - 1 }
-        : { ...item };
+      if (item.id === id) {
+        let amount = item.amount - 1;
+        if (amount > 0) {
+          return { ...item, amount: item.amount - 1 };
+        }
+        // wanna show allert
+        if_zero = true;
+        return { ...item };
+      }
+      return { ...item };
     });
-    setCart(newAmount);
+    if (if_zero) {
+      let item_zero = [...cart].filter((item) => item.id !== id);
+      setCart(item_zero);
+    } else {
+      setCart(newAmount);
+    }
   };
   const addToCart = (product) => {
     // console.log([cart]);
-    // console.log(product);
-    const { id, image, title, price, amount } = product;
-
+    const { id, image, Title, Price, amount } = product;
     const item = [...cart].find((item) => item.id === id);
 
     if (item) {
       increaseAmount(id);
       //   return;
     } else {
-      const newItem = { id, title, image: image.url, price, amount: 1 };
+      const newItem = { id, Title, image, Price, amount: 1 };
       const newCart = [...cart, newItem];
       setCart(newCart);
     }

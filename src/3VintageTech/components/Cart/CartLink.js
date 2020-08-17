@@ -5,7 +5,7 @@ import { CartContext } from "../../context/cart";
 export default function CartLink() {
   let ada = 0;
   const { cartItems } = React.useContext(CartContext);
-  console.log({ cartItems });
+  // console.log({ cartItems });
   if (cartItems < 1) {
     ada = 0;
   } else {

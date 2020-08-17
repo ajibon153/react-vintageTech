@@ -3,13 +3,13 @@ import React from "react";
 import axios from "axios"; // npm i axios --save
 import url from "../utils/URL";
 // import url from "../utils/localProduct";
-import { featureProducts, flattenProducts } from "../utils/helpers";
 import Product from "../components/Products/Product";
 // useEffect()
 // by default run after every render
 // let perfom side effect like= data fetching
 // return a cleanup function to avoid memory leaks, so cannot async
 // second argument - array of values(depedencies)
+import { featureProducts, flattenProducts } from "../utils/helpers";
 
 export const ProductContext = React.createContext();
 

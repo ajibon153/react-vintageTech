@@ -5,13 +5,14 @@ import loginUser from "../strapi/loginUser";
 import registerUser from "../strapi/registerUser";
 
 // // handle user
-
+import { UserContext } from "../context/user";
 import { useHistory } from "react-router-dom";
 
 export default function Login() {
   const history = useHistory();
 
   // // setup user context
+  const { userLogin, alert, showAlert } = React.useContext(UserContext);
 
   // // state value
   const [email, setEmail] = React.useState("");
@@ -19,7 +20,7 @@ export default function Login() {
   const [username, setUsername] = React.useState("default");
   const [isMember, setIsMember] = React.useState(true);
 
-  let isEmpty = !email || !password || !username;
+  let isEmpty = !email || !password || !username || alert.show;
 
   const toggleMember = () => {
     setIsMember((prevValue) => {
@@ -30,25 +31,38 @@ export default function Login() {
   };
 
   const handleSubmit = async (e) => {
-    // alert
     e.preventDefault();
-    // console.log("member " + isMember);
-    // console.log("email " + email);
-    // console.log("password " + password);
-    // console.log("username " + username);
-
+    showAlert({
+      msg: "Sedang mengakses server. Mohon tunggu sebentar...",
+      show: true,
+    });
     let response;
     if (isMember) {
       response = await loginUser({ email, password });
     } else {
       response = await registerUser({ email, password, username });
     }
+
     console.log(response);
+
     if (response) {
       // success
-      console.log("success");
+      const {
+        jwt: token,
+        user: { username },
+      } = response.data;
+      const newUser = { token, username };
+      userLogin(newUser);
+      showAlert({
+        msg: `Anda telah Login : ${username}. Selamat berbelanja`,
+      });
+      history.push("/products");
     } else {
       // show alert
+      showAlert({
+        msg: `Login bermasalah. Silahlan Coba lagi`,
+        type: "danger",
+      });
       console.log("email atau username sudah terdaftar");
     }
   };
