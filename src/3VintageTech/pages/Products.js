@@ -9,5 +9,5 @@ export default function Products() {
     return <Loading />;
   }
 
-  return <ProductList title="our product" products={products} />;
+  return <ProductList title="Our Smarthphone Product " products={products} />;
 }

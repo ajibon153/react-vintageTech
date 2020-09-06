@@ -20,5 +20,9 @@ export default function LoginLink() {
       </button>
     );
   }
-  return <Link to="/login">Login</Link>;
+  return (
+    <Link to="/login" className="login-btn">
+      Login
+    </Link>
+  );
 }

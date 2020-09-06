@@ -8,7 +8,6 @@ function getItemFromLocalStorage() {
     ? JSON.parse(localStorage.getItem("cart"))
     : [];
 }
-
 const CartContext = React.createContext();
 
 function CartProvider({ children }) {
@@ -19,7 +18,6 @@ function CartProvider({ children }) {
   React.useEffect(() => {
     //   local storage
     localStorage.setItem("cart", JSON.stringify(cart));
-
     let newCartItems = cart.reduce((total, cartItem) => {
       return (total += cartItem.amount);
     }, 0);
