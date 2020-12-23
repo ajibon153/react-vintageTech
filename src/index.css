@@ -358,6 +358,8 @@ Product List
   position: relative;
 }
 .featured-center .img-featured .info {
+  display: flex;
+  flex-direction: column;
   z-index: 3;
   text-align: center;
   position: absolute;
@@ -591,6 +593,7 @@ Single Product
   text-transform: capitalize;
   font-size: 2.3rem;
   letter-spacing: var(--mainSpacing);
+  color: var(--mainBlack);
 }
 .single-product h2 {
   color: var(--primaryColor);
@@ -715,7 +718,7 @@ Login Form
   width: 100%;
   border: none;
   border-bottom: 2px solid var(--darkGrey);
-  margin-bottom: 1.25rem;
+  /* margin-bottom: 1.25rem; */
   padding: 0.5rem;
   font-size: 1.2rem;
 }

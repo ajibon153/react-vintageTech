@@ -1,15 +1,16 @@
 // products context
-import React from "react";
-import axios from "axios"; // npm i axios --save
-import url from "../utils/URL";
+import React from 'react';
+import axios from 'axios'; // npm i axios --save
+import url from '../utils/URL';
 // import url from "../utils/localProduct";
-import Product from "../components/Products/Product";
+import Product from '../components/Products/Product';
 // useEffect()
 // by default run after every render
 // let perfom side effect like= data fetching
 // return a cleanup function to avoid memory leaks, so cannot async
 // second argument - array of values(depedencies)
-import { featureProducts, flattenProducts } from "../utils/helpers";
+import { featureProducts, flattenProducts } from '../utils/helpers';
+import { getDataFromApi } from '../firebase/ApiProduct';
 
 export const ProductContext = React.createContext();
 
@@ -22,17 +23,32 @@ export default function ProductProvider({ children }) {
 
   React.useEffect(() => {
     setLoading(true);
-    axios.get(`${url}/products`).then(
-      // (storeProduct) => console.log(storeProduct) //tes
-      (response) => {
-        const product = flattenProducts(response.data);
+
+    async function load() {
+      let get = await getDataFromApi();
+      console.log('getDataFromApi', get);
+      if (get.success) {
+        const product = flattenProducts(get.data);
         const feature = featureProducts(product);
-        // console.log("product" + product);
         setProducts(product);
+        console.log('product', product);
+
         setFeatured(feature);
         setLoading(false);
       }
-    );
+    }
+    load();
+    // axios.get(`${url}/products`).then(
+    //   // (storeProduct) => console.log(storeProduct) //tes
+    //   (response) => {
+    //     const product = flattenProducts(response.data);
+    //     const feature = featureProducts(product);
+    //     // console.log("product" + product);
+    //     setProducts(product);
+    //     setFeatured(feature);
+    //     setLoading(false);
+    //   }
+    // );
 
     // return () => {};
   }, []); // second argument, agar tidak looping terus ngfetch data ke tiap render response

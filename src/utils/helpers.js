@@ -1,11 +1,11 @@
-import url from "./URL";
+import url from './URL';
 
 // untuk mengubah string url.img
 export function flattenProducts(data) {
   // console.log("URL " + url);
   return data.map((item) => {
     // //cloudinary
-    let image = item.image.url;
+    let image = item.data.image.url;
     // // local setup no deplotment
     // let image = `${url}${item.image.url}`;
     // let dataFlatten = { ...item, image };

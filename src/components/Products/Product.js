@@ -1,25 +1,30 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import NumberFormat from "react-number-format";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import NumberFormat from 'react-number-format';
 
-export default function Product({ image, Title, id, Price }) {
-  // console.log("image" + image);
+export default function Product({ data }) {
+  // console.log('image', data);
+  // console.log('list', products);
+
   return (
-    <article className="product">
-      <div className="img-container">
-        <img src={image} title={Title} />
-        <Link to={`products/${id}`} className="btn btn-primary product-link">
+    <article className='product'>
+      <div className='img-container'>
+        <img src={data.image.url} title={data.title} />
+        <Link
+          to={`products/${data.id}`}
+          className='btn btn-primary product-link'
+        >
           details
         </Link>
       </div>
-      <div className="product-footer">
-        <p className="product-title">{Title}</p>
-        <p className="product-price">
+      <div className='product-footer'>
+        <p className='product-title'>{data.title}</p>
+        <p className='product-price'>
           <NumberFormat
-            value={Price}
-            displayType={"text"}
+            value={data.price}
+            displayType={'text'}
             thousandSeparator={true}
-            prefix={"Rp "}
+            prefix={'Rp '}
           />
         </p>
       </div>
