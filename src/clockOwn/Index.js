@@ -1,13 +1,13 @@
-import React from "react";
-import "./Clock.css";
-import { Background } from "./Background";
-import { Quotes } from "./Quotes";
+import React from 'react';
+import './Clock.css';
+import { Background } from './Background';
+import { Quotes } from './Quotes';
 
 const index = () => {
   return (
-    <div id="parent">
+    <div id='parent'>
       index
-      <Background />
+      {/* <Background /> */}
       <Quotes />
     </div>
   );

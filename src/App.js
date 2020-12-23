@@ -1,10 +1,11 @@
-import React from "react";
+import React from 'react';
 
 // // 3 Vintage tech store
-import Vintage from "./3VintageTech/App";
-import ProductProvider from "./3VintageTech/context/products";
-import { CartProvider } from "./3VintageTech/context/cart";
-import { UserProvider } from "./3VintageTech/context/user";
+import Clock from './clockOwn/Index';
+import Vintage from './3VintageTech/App';
+import ProductProvider from './3VintageTech/context/products';
+import { CartProvider } from './3VintageTech/context/cart';
+import { UserProvider } from './3VintageTech/context/user';
 function App() {
   return (
     <>
@@ -12,7 +13,8 @@ function App() {
       <UserProvider>
         <ProductProvider>
           <CartProvider>
-            <Vintage />
+            {/* <Vintage /> */}
+            <Clock />
           </CartProvider>
         </ProductProvider>
       </UserProvider>
