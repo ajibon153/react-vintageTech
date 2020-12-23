@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 :root {
   --primaryColor: #f15025;
   --mainWhite: #fff;
@@ -12,9 +12,10 @@
   box-sizing: border-box;
 }
 body {
-  background: var(--mainGrey);
+  /* background: var(--mainGrey); */
+  background: var(--mainWhite);
   color: var(--mainBlack);
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 h1 {
   text-align: center;
