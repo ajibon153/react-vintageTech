@@ -5,7 +5,7 @@ export function flattenProducts(data) {
   // console.log("URL " + url);
   return data.map((item) => {
     // //cloudinary
-    let image = item.data.image.url;
+    let image = (item.image && item.data.image.url) || null;
     // // local setup no deplotment
     // let image = `${url}${item.image.url}`;
     // let dataFlatten = { ...item, image };

@@ -1,12 +1,14 @@
-import React from "react";
-import { CartContext } from "../context/cart";
-import { UserContext } from "../context/user";
-import { useHistory, Redirect } from "react-router-dom";
-import emptyCart from "../components/Cart/EmptyCart";
-import NumberFormat from "react-number-format";
+import React from 'react';
+import { CartContext } from '../context/cart';
+import { UserContext } from '../context/user';
+import { useHistory, Redirect } from 'react-router-dom';
+import emptyCart from '../components/Cart/EmptyCart';
+import NumberFormat from 'react-number-format';
 
-import submitOrder from "../strapi/submitOrder";
-import EmptyCart from "../components/Cart/EmptyCart";
+// import submitOrder from '../strapi/submitOrder';
+import { submitOrder } from '../firebase/ApiOrder';
+
+import EmptyCart from '../components/Cart/EmptyCart';
 
 // react-stripe-element
 import {
@@ -14,7 +16,7 @@ import {
   StripeProvider,
   Elements,
   injectStripe,
-} from "react-stripe-elements";
+} from 'react-stripe-elements';
 
 function Checkout(props) {
   const { cart, total, clearCart } = React.useContext(CartContext);
@@ -22,12 +24,12 @@ function Checkout(props) {
   const history = useHistory();
 
   // state value
-  const [name, setName] = React.useState("");
-  const [error, setError] = React.useState("");
+  const [name, setName] = React.useState('');
+  const [error, setError] = React.useState('');
   const isEmpty = !name || alert.show;
 
   async function handleSubmit(e) {
-    showAlert({ msg: "Mengirim pesanan... mohon tunggu" });
+    showAlert({ msg: 'Mengirim pesanan... mohon tunggu' });
     e.preventDefault();
     const response = await props.stripe
       .createToken()
@@ -38,7 +40,7 @@ function Checkout(props) {
 
     if (token) {
       // hideAlert();
-      setError("");
+      setError('');
       const { id } = token;
       console.log(id);
       let order = await submitOrder({
@@ -48,15 +50,18 @@ function Checkout(props) {
         stripeTokenId: id,
         userToken: user.token,
       });
+      console.log('order', order);
       if (order) {
-        showAlert({ msg: "Pesanan Selesai" });
+        showAlert({ msg: 'Pesanan Selesai' });
         clearCart();
-        history.push("/");
+        setTimeout(() => {
+          history.push('/');
+        }, 1000);
         return;
       } else {
         showAlert({
-          msg: "Ada error saat pemesanan, mohon ulangi kembali",
-          type: "danger",
+          msg: 'Ada error saat pemesanan, mohon ulangi kembali',
+          type: 'danger',
         });
       }
     } else {
@@ -69,26 +74,26 @@ function Checkout(props) {
   if (cart.length < 1) return <EmptyCart />;
 
   return (
-    <section className="section form">
-      <h2 className="section-title">Checkout</h2>
-      <form className="checkout-form">
+    <section className='section form'>
+      <h2 className='section-title'>Checkout</h2>
+      <form className='checkout-form'>
         <h3>
-          Total Order :{" "}
+          Total Order :{' '}
           <span>
             <NumberFormat
               value={total}
-              displayType={"text"}
+              displayType={'text'}
               thousandSeparator={true}
-              prefix={"Rp "}
+              prefix={'Rp '}
             />
           </span>
         </h3>
         {/* Single input */}
-        <div className="form-control">
-          <label htmlFor="name">Name</label>
+        <div className='form-control'>
+          <label htmlFor='name'>Name</label>
           <input
-            type="text"
-            id="name"
+            type='text'
+            id='name'
             value={name}
             onChange={(e) => {
               setName(e.target.value);
@@ -96,9 +101,9 @@ function Checkout(props) {
           />
           {/* end Single input */}
           {/* Card Element */}
-          <div className="stripe-input">
-            <label htmlFor="card-element">Credit or Debit</label>
-            <p className="stripe-info">
+          <div className='stripe-input'>
+            <label htmlFor='card-element'>Credit or Debit</label>
+            <p className='stripe-info'>
               Test using this credit card : <span>4242 4242 4242 4242</span>
               <br />
               Masukan 5 digit untuk kode pos
@@ -109,17 +114,17 @@ function Checkout(props) {
           {/* end Card Element */}
 
           {/* STRIPE element */}
-          <CardElement className="card-element"></CardElement>
+          <CardElement className='card-element'></CardElement>
           {/* stripe error */}
-          {error && <p className="form-empty">{error}</p>}
+          {error && <p className='form-empty'>{error}</p>}
           {/* empty value */}
           {isEmpty ? (
-            <p className="form-empty">please fill out name field</p>
+            <p className='form-empty'>please fill out name field</p>
           ) : (
             <button
-              type="submit"
+              type='submit'
               onClick={handleSubmit}
-              className="btn btn-primary btn-block"
+              className='btn btn-primary btn-block'
             >
               Submit
             </button>
@@ -134,7 +139,7 @@ function Checkout(props) {
 const CardForm = injectStripe(Checkout);
 const StripeWrapper = () => {
   return (
-    <StripeProvider apiKey="pk_test_51HEGO4JXD4EHi4IMzwjG3SxK4zb8DnMIu8rCmhpVlPWxMSaeQafKLnWTx3uPITIaPu6Jz6gk7DsFMVCsEWcYnGya00dcQfgnN7">
+    <StripeProvider apiKey='pk_test_51HEGO4JXD4EHi4IMzwjG3SxK4zb8DnMIu8rCmhpVlPWxMSaeQafKLnWTx3uPITIaPu6Jz6gk7DsFMVCsEWcYnGya00dcQfgnN7'>
       <Elements>
         <CardForm></CardForm>
       </Elements>

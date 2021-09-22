@@ -21,7 +21,7 @@ export default function Cart() {
       <div>
         <h2>your cart</h2>
         {cart.map((item) => {
-          return <CartItem key={item.id} {...item} />;
+          return <CartItem key={item.id} data={item} />;
         })}
         <h2>
           total :
@@ -32,16 +32,15 @@ export default function Cart() {
             prefix={'Rp '}
           />
         </h2>
-        {/* {user.token ? (
+        {user.token ? (
+          <Link to='/checkout' className='btn btn-primary btn-block'>
+            checkout
+          </Link>
         ) : (
-          <Link to="/login" className="btn btn-primary btn-block">
+          <Link to='/login' className='btn btn-primary btn-block'>
             login
           </Link>
-        )} */}
-
-        <Link to='/checkout' className='btn btn-primary btn-block'>
-          checkout
-        </Link>
+        )}
       </div>
     </section>
   );

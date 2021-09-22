@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { UserContext } from "../context/user";
-import { CartContext } from "../context/cart";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { UserContext } from '../context/user';
+import { CartContext } from '../context/cart';
 
 export default function LoginLink() {
   const { user, userLogout } = React.useContext(UserContext);
@@ -10,7 +10,7 @@ export default function LoginLink() {
   if (user.token) {
     return (
       <button
-        className="login-btn"
+        className='login-btn'
         onClick={() => {
           userLogout();
           clearCart();
@@ -21,7 +21,7 @@ export default function LoginLink() {
     );
   }
   return (
-    <Link to="/login" className="login-btn">
+    <Link to='/login' className='login-btn'>
       Login
     </Link>
   );

@@ -1,30 +1,32 @@
-import React from "react";
-import { FaAngleUp, FaAngleDown } from "react-icons/fa";
-import { CartContext } from "../../context/cart";
-import NumberFormat from "react-number-format";
+import React from 'react';
+import { FaAngleUp, FaAngleDown } from 'react-icons/fa';
+import { CartContext } from '../../context/cart';
+import NumberFormat from 'react-number-format';
 
-export default function CartItem({ id, image, Title, Price, amount }) {
+export default function CartItem({ data }) {
   const { removeItem, increaseAmount, decreaseAmount } = React.useContext(
     CartContext
   );
+  console.log('data', data);
+
   return (
-    <article className="cart-item">
-      <img src={image} alt={Title} />
+    <article className='cart-item'>
+      <img src={data.image} alt={data.data.title} />
       <div>
-        <h4>{Title}</h4>
+        <h4>{data.data.title}</h4>
         <h5>
           <NumberFormat
-            value={Price}
-            displayType={"text"}
+            value={data.data.price * data.amount}
+            displayType={'text'}
             thousandSeparator={true}
-            prefix={"Rp "}
+            prefix={'Rp '}
           />
         </h5>
         <button
-          type="button"
-          className="card-btn remove-btn"
+          type='button'
+          className='card-btn remove-btn'
           onClick={() => {
-            removeItem(id);
+            removeItem(data.data.id);
           }}
         >
           remove
@@ -32,18 +34,18 @@ export default function CartItem({ id, image, Title, Price, amount }) {
       </div>
       <div>
         <button
-          type="button"
-          className="cart-btn amount-btn"
-          onClick={() => increaseAmount(id)}
+          type='button'
+          className='cart-btn amount-btn'
+          onClick={() => increaseAmount(data.data.id)}
         >
           <FaAngleUp />
         </button>
-        <p className="item-amount">{amount}</p>
+        <p className='item-amount'>{data.amount}</p>
         <button
-          type="button"
-          className="cart-btn amount-btn"
+          type='button'
+          className='cart-btn amount-btn'
           onClick={() => {
-            decreaseAmount(id);
+            decreaseAmount(data.data.id);
           }}
         >
           <FaAngleDown />

@@ -22,7 +22,7 @@ export default function ProductDetails() {
       price: Price,
       description: Description,
     } = product.data;
-    console.log(product);
+    console.log('product', product);
     return (
       <section className='single-product'>
         <img src={image} alt={Title} className='single-product-image' />

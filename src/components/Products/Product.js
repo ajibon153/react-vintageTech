@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import NumberFormat from 'react-number-format';
+import PropTypes from 'prop-types';
 
 export default function Product({ data }) {
   // console.log('image', data);
@@ -31,3 +32,10 @@ export default function Product({ data }) {
     </article>
   );
 }
+
+Product.propTypes = {
+  image: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
+};
